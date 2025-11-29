@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chinservice — Профессиональный ремонт электроники</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: #000;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #333;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ccc;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle at center, #111, #000);
+      position: relative;
+      overflow: hidden;
+      padding: 0 20px;
+    }
+
+    .grid {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(transparent 39px, rgba(255,255,255,0.05) 1px),
+        linear-gradient(90deg, transparent 39px, rgba(255,255,255,0.05) 1px);
+      animation: moveGrid 12s linear infinite;
+      top: -50%;
+      left: -50%;
+    }
+
+    @keyframes moveGrid {
+      from { transform: translate(0,0); }
+      to { transform: translate(40px,40px); }
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 8vw, 72px);
+      margin-bottom: 20px;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      font-size: clamp(16px, 4vw, 20px);
+      max-width: 600px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      color: #ccc;
+    }
+
+    .hero button {
+      margin-top: 35px;
+      padding: 16px 40px;
+      font-size: 18px;
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero button:hover {
+      background: #fff;
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    /* Order Section */
+    .order-section {
+      min-height: 100vh;
+      padding: 100px 20px 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+
+    .order-container {
+      max-width: 600px;
+      width: 100%;
+      background: #0d0d0d;
+      padding: 40px;
+      border-radius: 14px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.08);
+      border: 1px solid #333;
+    }
+
+    .order-title {
+      font-weight: 300;
+      font-size: 30px;
+      margin-bottom: 25px;
+      text-align: center;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+
+    .order-form input,
+    .order-form textarea,
+    .order-form select {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background: #111;
+      border: 1px solid #444;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .order-form textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: inherit;
+    }
+
+    .order-form button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 18px;
+      background: #fff;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 10px 0;
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid #222;
+    }
+
+    .contact-info {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+      }
+      .logo {
+        font-size: 20px;
+      }
+      nav a {
+        margin-left: 15px;
+        font-size: 14px;
+      }
+      .order-container {
+        padding: 30px 20px;
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Chinservice</div>
+    <nav>
+      <a href="#home">Главная</a>
+      <a href="#order">Заказ ремонта</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="grid"></div>
+    <h1>Профессиональный ремонт электроники</h1>
+    <p>Быстро. Надёжно. Качественно.</p>
+    <p>Ремонтируем смартфоны, ноутбуки, планшеты и другую технику.</p>
+    <button id="hero-button">Оставить заявку</button>
+  </section>
+
+  <section id="order" class="order-section">
+    <div class="order-container">
+      <h2 class="order-title">Оформление заявки</h2>
+
+      <form class="order-form" id="order-form">
+        <input type="text" id="name" placeholder="Ваше имя" required />
+        <input type="text" id="phone" placeholder="Номер телефона" required />
+
+        <select id="brand" required>
+          <option value="">Марка устройства</option>
+          <option>Apple</option>
+          <option>Samsung</option>
+          <option>Xiaomi</option>
+          <option>Huawei</option>
+          <option>Lenovo</option>
+          <option>Asus</option>
+          <option>Dell</option>
+          <option>HP</option>
+          <option>Другое</option>
+        </select>
+
+        <input type="text" id="model" placeholder="Модель устройства" required />
+
+        <select id="type" required>
+          <option value="">Тип устройства</option>
+          <option>Смартфон</option>
+          <option>Ноутбук</option>
+          <option>Планшет</option>
+          <option>Компьютер</option>
+          <option>Монитор</option>
+          <option>Другое</option>
+        </select>
+
+        <textarea id="problem" rows="5" placeholder="Опишите проблему" required></textarea>
+
+        <div class="loading" id="loading">
+          <span>Отправка заявки...</span>
+        </div>
+
+        <button type="submit" id="submit-btn">Отправить заявку</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div style="max-width: 600px; margin: 0 auto;">
+      <div style="font-size: 18px; margin-bottom: 20px;">Связаться с нами</div>
+      
+      <div class="contact-info">
+        📞 Телефон: +7 (900) 000‑00‑00
+      </div>
+
+      <div class="contact-info">
+        📱 Telegram: @chinservice
+      </div>
+
+      <div class="contact-info">
+        🌐 VK: vk.com/chinservice
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Автоматическое определение URL API
+    function getApiBaseUrl() {
+      // Если на localhost - используем localhost:5000
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:5000';
+      }
+      // Если на GitHub Pages - используем твой сервер (ЗАМЕНИ НА РЕАЛЬНЫЙ URL)
+      else if (window.location.hostname.includes('github.io')) {
+        return 'https://твой-сервер.herokuapp.com'; // ЗАМЕНИ НА РЕАЛЬНЫЙ URL
+      }
+      // Для других случаев
+      else {
+        return window.location.origin; // Используем тот же домен
+      }
+    }
+
+    const API_BASE_URL = getApiBaseUrl();
+
+    function scrollToOrder() {
+      document.getElementById('order').scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const submitBtn = document.getElementById('submit-btn');
+      const loading = document.getElementById('loading');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправка...';
+      loading.style.display = 'block';
+
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        brand: document.getElementById('brand').value,
+        model: document.getElementById('model').value.trim(),
+        type: document.getElementById('type').value,
+        problem: document.getElementById('problem').value.trim(),
+        submittedAt: new Date().toLocaleString('ru-RU')
+      };
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/order`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          alert('✅ Заявка отправлена! Мы свяжемся с вами.');
+          form.reset();
+        } else {
+          throw new Error('Ошибка сервера');
+        }
+      } catch (error) {
+        console.error('Ошибка:', error);
+        alert('❌ Ошибка отправки. Позвоните нам.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+        loading.style.display = 'none';
+      }
+    }
+
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+      // Обработчик для формы
+      document.getElementById('order-form').addEventListener('submit', handleSubmit);
+      
+      // Обработчик для кнопки в герое
+      document.getElementById('hero-button').addEventListener('click', scrollToOrder);
+      
+      // Плавная прокрутка для навигации
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          document.querySelector(targetId).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      console.log('🚀 Сайт загружен! API URL:', API_BASE_URL);
+    });
+  </script>
+</body>
+</html>
